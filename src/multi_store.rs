@@ -6,7 +6,7 @@ use self::MultiStoreError::*;
 
 #[derive(Debug)]
 pub enum MultiStoreError<E> {
-	NoSplit,
+    NoSplit,
     StoreNotFound(String),
     WrappedError(E)
 }
@@ -89,12 +89,12 @@ impl<'a, T: 'a> MultiStore<'a, T> {
     }
 
     pub fn add<E: 'a, S, F: 'a>(
-    	&mut self,
-    	prefix: &str,
-    	store: S,
-    	tr: F
+        &mut self,
+        prefix: &str,
+        store: S,
+        tr: F
     ) where S: 'a + AssetStore<E>, F: Fn(E) -> T {
-    	let wrapped = StoreWrapper::new(store, tr);
+        let wrapped = StoreWrapper::new(store, tr);
         self.stores.insert(prefix.to_string(), Box::new(wrapped));
     }
 
@@ -216,3 +216,4 @@ impl<'a, T: 'a> MultiStore<'a, T> {
 //         }
 //     }
 // }
+
